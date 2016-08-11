@@ -9,6 +9,8 @@ __export(require('./footerComponent/footerComponent'));
 __export(require('./topNav/topNav'));
 __export(require('./dashboardHeader/dashboardHeader'));
 __export(require('./pageContent/pageContent'));
+__export(require('./registerComponent/registerComponent'));
+__export(require('./forgetComponent/forgetComponent'));
 // for wrapper -> loginComponent and wrapperComponent
 __export(require('./loginComponent/loginComponent'));
 __export(require('./wrapperComponent/wrapperComponent'));

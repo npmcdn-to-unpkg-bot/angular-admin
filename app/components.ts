@@ -5,6 +5,10 @@ export * from './footerComponent/footerComponent'
 export * from './topNav/topNav'
 export * from './dashboardHeader/dashboardHeader'
 export * from './pageContent/pageContent'
+export * from './registerComponent/registerComponent'
+export * from './forgetComponent/forgetComponent'
+
+
 
 // for wrapper -> loginComponent and wrapperComponent
 export * from './loginComponent/loginComponent'

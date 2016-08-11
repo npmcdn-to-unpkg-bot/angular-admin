@@ -1,6 +1,8 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import {leftSidebar, rightSidebar, smallChat, footerComponent, topNav, dashboardHeader, pageContent} from '../components'
+import { Router } from '@angular/router';
 import { tostrService } from '../services'
+import {  loginService } from '../services'
 declare var $:any;
 var _directives:any = [
     leftSidebar, 
@@ -17,10 +19,9 @@ var _directives:any = [
 @Component({
   //selector: 'admin-component',
   templateUrl: 'app/app/landing.html',
-  directives: _directives,
-  providers: [tostrService]
+  directives: _directives
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit, OnInit{
     data1: Array<any> = [
         [0,4],[1,8],[2,5],[3,10],[4,4],[5,16],[6,5],[7,11],[8,6],[9,11],[10,30],[11,10],[12,13],[13,4],[14,3],[15,3],[16,6]
     ];
@@ -98,10 +99,31 @@ export class AppComponent implements AfterViewInit{
     private ctxDoughnut = null;
     private DoughnutChart = null;
     private Polarchart = null;
-    constructor(private _tostrService:tostrService){
-        
+    
+    constructor(private _tostrService:tostrService, private _router: Router, private _loginService:loginService){
+        console.log("_loginService.isLoggedIn()",_loginService.isLoggedIn());
+        if(!_loginService.isLoggedIn()){
+            setTimeout(()=>{
+                this._router.navigate(['/']);
+            },100);
+        }
+    }
+    ngOnInit(){
+        console.log("_loginService.isLoggedIn()",this._loginService.isLoggedIn());
     }
     ngAfterViewInit(){
+        if(!this._loginService.isLoggedIn()) {
+            this._tostrService.$tostrServiceEvent.next({ 
+                closeButton : true,
+                progressBar : true,
+                showMethod : "slideDown",
+                timeOut : 4000,
+                msgBold : "Welcome",
+                msgSimple : "Please Login To Enter",
+                finalTimeOut : 1300
+            });
+            return;
+        }
         this._tostrService.$tostrServiceEvent.next({ 
             closeButton : true,
             progressBar : true,

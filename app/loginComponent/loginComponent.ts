@@ -1,13 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES} from '@angular/router';
 import {  loginService } from '../services'
+import { loginResponse } from '../classes';
 declare var $:any;
 @Component({
   //selector: 'login-component',
   templateUrl: 'app/loginComponent/loginComponent.html',
   //templateUrl: 'app/loginComponent/test.html',
-  directives: [ROUTER_DIRECTIVES],
-  providers: [loginService]  
+  directives: [ROUTER_DIRECTIVES]  
 })
 export class loginComponent implements OnDestroy {
     loginModel:any = {
@@ -25,8 +25,12 @@ export class loginComponent implements OnDestroy {
     }
     loginApp(){
         console.log("loginModel ",this.loginModel);
-        if(this.loginModel.user=="demo" && this.loginModel.pass=="demo"){
-            
+        let __loginResponse:loginResponse = this._loginService.login(this.loginModel.user,this.loginModel.pass);
+        console.log(__loginResponse);
+        if(__loginResponse.result){
+            setTimeout(()=>{
+                this._router.navigate(['/application']);
+            },100);
         }
     }
 }

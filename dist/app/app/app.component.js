@@ -10,7 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var components_1 = require('../components');
+var router_1 = require('@angular/router');
 var services_1 = require('../services');
+var services_2 = require('../services');
 var _directives = [
     components_1.leftSidebar,
     components_1.rightSidebar,
@@ -21,8 +23,11 @@ var _directives = [
     components_1.topNav
 ];
 var AppComponent = (function () {
-    function AppComponent(_tostrService) {
+    function AppComponent(_tostrService, _router, _loginService) {
+        var _this = this;
         this._tostrService = _tostrService;
+        this._router = _router;
+        this._loginService = _loginService;
         this.data1 = [
             [0, 4], [1, 8], [2, 5], [3, 10], [4, 4], [5, 16], [6, 5], [7, 11], [8, 6], [9, 11], [10, 30], [11, 10], [12, 13], [13, 4], [14, 3], [15, 3], [16, 6]
         ];
@@ -98,8 +103,29 @@ var AppComponent = (function () {
         this.ctxDoughnut = null;
         this.DoughnutChart = null;
         this.Polarchart = null;
+        console.log("_loginService.isLoggedIn()", _loginService.isLoggedIn());
+        if (!_loginService.isLoggedIn()) {
+            setTimeout(function () {
+                _this._router.navigate(['/']);
+            }, 100);
+        }
     }
+    AppComponent.prototype.ngOnInit = function () {
+        console.log("_loginService.isLoggedIn()", this._loginService.isLoggedIn());
+    };
     AppComponent.prototype.ngAfterViewInit = function () {
+        if (!this._loginService.isLoggedIn()) {
+            this._tostrService.$tostrServiceEvent.next({
+                closeButton: true,
+                progressBar: true,
+                showMethod: "slideDown",
+                timeOut: 4000,
+                msgBold: "Welcome",
+                msgSimple: "Please Login To Enter",
+                finalTimeOut: 1300
+            });
+            return;
+        }
         this._tostrService.$tostrServiceEvent.next({
             closeButton: true,
             progressBar: true,
@@ -118,10 +144,9 @@ var AppComponent = (function () {
         core_1.Component({
             //selector: 'admin-component',
             templateUrl: 'app/app/landing.html',
-            directives: _directives,
-            providers: [services_1.tostrService]
+            directives: _directives
         }), 
-        __metadata('design:paramtypes', [services_1.tostrService])
+        __metadata('design:paramtypes', [services_1.tostrService, router_1.Router, services_2.loginService])
     ], AppComponent);
     return AppComponent;
 }());

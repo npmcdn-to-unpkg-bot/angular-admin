@@ -28,8 +28,14 @@ var loginComponent = (function () {
         $("body").removeClass("gray-bg");
     };
     loginComponent.prototype.loginApp = function () {
+        var _this = this;
         console.log("loginModel ", this.loginModel);
-        if (this.loginModel.user == "demo" && this.loginModel.pass == "demo") {
+        var __loginResponse = this._loginService.login(this.loginModel.user, this.loginModel.pass);
+        console.log(__loginResponse);
+        if (__loginResponse.result) {
+            setTimeout(function () {
+                _this._router.navigate(['/application']);
+            }, 100);
         }
     };
     loginComponent = __decorate([
@@ -37,8 +43,7 @@ var loginComponent = (function () {
             //selector: 'login-component',
             templateUrl: 'app/loginComponent/loginComponent.html',
             //templateUrl: 'app/loginComponent/test.html',
-            directives: [router_1.ROUTER_DIRECTIVES],
-            providers: [services_1.loginService]
+            directives: [router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [router_1.Router, services_1.loginService])
     ], loginComponent);

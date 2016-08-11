@@ -1,8 +1,9 @@
 "use strict";
-var loginComponent_1 = require('./loginComponent/loginComponent');
-var app_component_1 = require('./app/app.component');
+var components_1 = require('./components');
 exports.AppRoutes = [
-    { path: '', component: loginComponent_1.loginComponent },
-    { path: 'application', component: app_component_1.AppComponent }
+    { path: '', component: components_1.loginComponent },
+    { path: 'application', component: components_1.AppComponent },
+    { path: 'forget', component: components_1.forgetComponent },
+    { path: 'register', component: components_1.registerComponent }
 ];
 //# sourceMappingURL=routes.js.map
