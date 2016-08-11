@@ -10,19 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var services_1 = require('../services');
 var loginComponent = (function () {
-    function loginComponent(_router) {
+    function loginComponent(_router, _loginService) {
         this._router = _router;
-        //_router.navigate(['application'])
+        this._loginService = _loginService;
+        this.loginModel = {
+            user: "", pass: ""
+        };
+        this.loginModel.user = "";
+        this.loginModel.pass = "";
+        $("body").addClass("gray-bg");
+        //_router.navigate(['application']);
+        console.log(_loginService.login("", ""));
     }
+    loginComponent.prototype.ngOnDestroy = function () {
+        $("body").removeClass("gray-bg");
+    };
+    loginComponent.prototype.loginApp = function () {
+        console.log("loginModel ", this.loginModel);
+        if (this.loginModel.user == "demo" && this.loginModel.pass == "demo") {
+        }
+    };
     loginComponent = __decorate([
         core_1.Component({
             //selector: 'login-component',
-            //templateUrl: 'app/loginComponent/loginComponent.html'
-            templateUrl: 'app/loginComponent/test.html',
-            directives: [router_1.ROUTER_DIRECTIVES]
+            templateUrl: 'app/loginComponent/loginComponent.html',
+            //templateUrl: 'app/loginComponent/test.html',
+            directives: [router_1.ROUTER_DIRECTIVES],
+            providers: [services_1.loginService]
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, services_1.loginService])
     ], loginComponent);
     return loginComponent;
 }());
