@@ -8,13 +8,15 @@ declare var $:any;
 })
 export class registerComponent implements AfterViewInit,OnDestroy {
     ngAfterViewInit(){
-        $("body").addClass("gray-bg");
+        //$("body").addClass("gray-bg");
+        parent.document.body.classList.add("gray-bg");
 //        $('.i-checks').iCheck({
 //            checkboxClass: 'icheckbox_square-green',
 //            radioClass: 'iradio_square-green',
 //        });
     }
     ngOnDestroy(){
-        $("body").removeClass("gray-bg");
+        //$("body").removeClass("gray-bg");
+        parent.document.body.className = parent.document.body.className.replace("gray-bg","");
     }
 }

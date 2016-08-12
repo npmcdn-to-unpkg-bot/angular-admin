@@ -16,12 +16,14 @@ export class loginComponent implements OnDestroy {
     constructor(private _router: Router, private _loginService:loginService){
         this.loginModel.user = "";
         this.loginModel.pass = "";
-        $("body").addClass("gray-bg");
+        //$("body").addClass("gray-bg");
+        parent.document.body.classList.add("gray-bg");
         //_router.navigate(['application']);
         console.log(_loginService.login("",""));
     }
     ngOnDestroy(){
-        $("body").removeClass("gray-bg");
+        //$("body").removeClass("gray-bg");
+        parent.document.body.className = parent.document.body.className.replace("gray-bg",""); 
     }
     loginApp(){
         console.log("loginModel ",this.loginModel);
