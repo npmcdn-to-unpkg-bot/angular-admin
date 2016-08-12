@@ -20,12 +20,14 @@ var loginComponent = (function () {
         };
         this.loginModel.user = "";
         this.loginModel.pass = "";
-        $("body").addClass("gray-bg");
+        //$("body").addClass("gray-bg");
+        parent.document.body.classList.add("gray-bg");
         //_router.navigate(['application']);
         console.log(_loginService.login("", ""));
     }
     loginComponent.prototype.ngOnDestroy = function () {
-        $("body").removeClass("gray-bg");
+        //$("body").removeClass("gray-bg");
+        parent.document.body.className = parent.document.body.className.replace("gray-bg", "");
     };
     loginComponent.prototype.loginApp = function () {
         var _this = this;

@@ -9,5 +9,9 @@ declare var $:any;
 export class leftSidebar implements AfterViewInit{
     ngAfterViewInit(){
         $('#side-menu').metisMenu();
+        $('body.canvas-menu .sidebar-collapse').slimScroll({
+            height: '100%',
+            railOpacity: 0.9
+        });
     }
 }

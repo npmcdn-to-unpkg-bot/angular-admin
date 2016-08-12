@@ -14,6 +14,10 @@ var leftSidebar = (function () {
     }
     leftSidebar.prototype.ngAfterViewInit = function () {
         $('#side-menu').metisMenu();
+        $('body.canvas-menu .sidebar-collapse').slimScroll({
+            height: '100%',
+            railOpacity: 0.9
+        });
     };
     leftSidebar = __decorate([
         core_1.Component({

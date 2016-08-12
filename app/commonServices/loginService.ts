@@ -3,6 +3,8 @@ import { loginResponse } from '../classes';
 @Injectable()
 export class loginService {
   private __loginResult: boolean = false;
+  __appHeight: number = 0;
+  __appWidth: number = 0;
   constructor() {
   }
   isLoggedIn(){

@@ -24,7 +24,6 @@ var _directives = [
 ];
 var AppComponent = (function () {
     function AppComponent(_tostrService, _router, _loginService) {
-        var _this = this;
         this._tostrService = _tostrService;
         this._router = _router;
         this._loginService = _loginService;
@@ -106,12 +105,19 @@ var AppComponent = (function () {
         console.log("_loginService.isLoggedIn()", _loginService.isLoggedIn());
         if (!_loginService.isLoggedIn()) {
             setTimeout(function () {
-                _this._router.navigate(['/']);
+                //this._router.navigate(['/']);
             }, 100);
         }
     }
     AppComponent.prototype.ngOnInit = function () {
-        console.log("_loginService.isLoggedIn()", this._loginService.isLoggedIn());
+        this._loginService.__appHeight = parent.document.body.clientHeight;
+        this._loginService.__appWidth = parent.document.body.clientWidth;
+        if (parent.document.body.clientWidth < 769) {
+            parent.document.body.classList.add('body-small');
+        }
+        else {
+            parent.document.body.classList.remove('body-small');
+        }
     };
     AppComponent.prototype.ngAfterViewInit = function () {
         if (!this._loginService.isLoggedIn()) {
@@ -139,6 +145,15 @@ var AppComponent = (function () {
         this.ctxPolar = htmlElePolar.getContext("2d");
         var htmlEleDoughnut = document.getElementById("doughnutChart");
         this.ctxDoughnut = htmlEleDoughnut.getContext("2d");
+    };
+    AppComponent.prototype.onResize = function (e) {
+        console.log("onResize ", e.target);
+        if (parent.document.body.clientWidth < 769) {
+            parent.document.body.classList.add('body-small');
+        }
+        else {
+            parent.document.body.classList.remove('body-small');
+        }
     };
     AppComponent = __decorate([
         core_1.Component({

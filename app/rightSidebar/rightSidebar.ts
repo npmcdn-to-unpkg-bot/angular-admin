@@ -11,5 +11,11 @@ export class rightSidebar implements AfterViewInit{
         $('.right-sidebar-toggle').click(function () {
             $('#right-sidebar').toggleClass('sidebar-open');
         });
+        $('.sidebar-container').slimScroll({
+            height: '100%',
+            railOpacity: 0.4,
+            wheelStep: 10
+        });
+
     }
 }

@@ -104,12 +104,20 @@ export class AppComponent implements AfterViewInit, OnInit{
         console.log("_loginService.isLoggedIn()",_loginService.isLoggedIn());
         if(!_loginService.isLoggedIn()){
             setTimeout(()=>{
-                this._router.navigate(['/']);
+                //this._router.navigate(['/']);
             },100);
         }
     }
     ngOnInit(){
-        console.log("_loginService.isLoggedIn()",this._loginService.isLoggedIn());
+        this._loginService.__appHeight = parent.document.body.clientHeight;
+        this._loginService.__appWidth = parent.document.body.clientWidth;
+        if (parent.document.body.clientWidth < 769) {
+            parent.document.body.classList.add('body-small');
+        } else {
+            parent.document.body.classList.remove('body-small');
+        }
+        
+
     }
     ngAfterViewInit(){
         if(!this._loginService.isLoggedIn()) {
@@ -134,10 +142,20 @@ export class AppComponent implements AfterViewInit, OnInit{
             finalTimeOut : 1300
         });
 
+
+
         let htmlElePolar:any = document.getElementById("polarChart");
         this.ctxPolar = htmlElePolar.getContext("2d");
         
         let htmlEleDoughnut:any = document.getElementById("doughnutChart");
         this.ctxDoughnut = htmlEleDoughnut.getContext("2d");
+    }
+    onResize(e){
+        console.log("onResize ",e.target);
+            if (parent.document.body.clientWidth < 769) {
+                parent.document.body.classList.add('body-small');
+            } else {
+                parent.document.body.classList.remove('body-small');
+            }
     }
 }
