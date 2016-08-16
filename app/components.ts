@@ -10,6 +10,13 @@ export * from './forgetComponent/forgetComponent'
 export * from './dashboard/dashboard'
 export * from './formBasic/formBasic'
 
+export * from './formAdvanced/formAdvanced'
+export * from './formWizard/formWizard'
+export * from './fileUpload/fileUpload'
+export * from './textEditor/textEditor'
+export * from './markDown/markDown'
+
+
 
 
 // for wrapper -> loginComponent and wrapperComponent

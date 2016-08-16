@@ -1,10 +1,11 @@
 import { Component, AfterViewInit } from '@angular/core';
-
+import { ROUTER_DIRECTIVES} from '@angular/router';
 declare var $:any;
 
 @Component({
   selector: 'left-sidebar',
-  templateUrl: 'app/sidebar/leftsidebar.html'
+  templateUrl: 'app/sidebar/leftsidebar.html',
+  directives: [ROUTER_DIRECTIVES]
 })
 export class leftSidebar implements AfterViewInit{
     ngAfterViewInit(){
