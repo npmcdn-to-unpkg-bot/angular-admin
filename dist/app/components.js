@@ -11,6 +11,8 @@ __export(require('./dashboardHeader/dashboardHeader'));
 __export(require('./pageContent/pageContent'));
 __export(require('./registerComponent/registerComponent'));
 __export(require('./forgetComponent/forgetComponent'));
+__export(require('./dashboard/dashboard'));
+__export(require('./formBasic/formBasic'));
 // for wrapper -> loginComponent and wrapperComponent
 __export(require('./loginComponent/loginComponent'));
 __export(require('./wrapperComponent/wrapperComponent'));

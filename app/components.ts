@@ -7,6 +7,8 @@ export * from './dashboardHeader/dashboardHeader'
 export * from './pageContent/pageContent'
 export * from './registerComponent/registerComponent'
 export * from './forgetComponent/forgetComponent'
+export * from './dashboard/dashboard'
+export * from './formBasic/formBasic'
 
 
 

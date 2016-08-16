@@ -13,13 +13,16 @@ var components_1 = require('../components');
 var router_1 = require('@angular/router');
 var services_1 = require('../services');
 var services_2 = require('../services');
+var router_2 = require('@angular/router');
 var _directives = [
     components_1.leftSidebar,
     components_1.rightSidebar,
     components_1.smallChat,
     components_1.footerComponent,
-    components_1.dashboardHeader,
-    components_1.pageContent,
+    router_2.ROUTER_DIRECTIVES,
+    //dashboardHeader,
+    //pageContent,
+    components_1.dashboard,
     components_1.topNav
 ];
 var AppComponent = (function () {
@@ -27,81 +30,6 @@ var AppComponent = (function () {
         this._tostrService = _tostrService;
         this._router = _router;
         this._loginService = _loginService;
-        this.data1 = [
-            [0, 4], [1, 8], [2, 5], [3, 10], [4, 4], [5, 16], [6, 5], [7, 11], [8, 6], [9, 11], [10, 30], [11, 10], [12, 13], [13, 4], [14, 3], [15, 3], [16, 6]
-        ];
-        this.data2 = [
-            [0, 1], [1, 0], [2, 2], [3, 0], [4, 1], [5, 3], [6, 1], [7, 5], [8, 2], [9, 3], [10, 2], [11, 1], [12, 0], [13, 2], [14, 8], [15, 0], [16, 0]
-        ];
-        this.doughnutData = [
-            {
-                value: 300,
-                color: "#a3e1d4",
-                highlight: "#1ab394",
-                label: "App"
-            },
-            {
-                value: 50,
-                color: "#dedede",
-                highlight: "#1ab394",
-                label: "Software"
-            },
-            {
-                value: 100,
-                color: "#A4CEE8",
-                highlight: "#1ab394",
-                label: "Laptop"
-            }
-        ];
-        this.doughnutOptions = {
-            segmentShowStroke: true,
-            segmentStrokeColor: "#fff",
-            segmentStrokeWidth: 2,
-            percentageInnerCutout: 45,
-            animationSteps: 100,
-            animationEasing: "easeOutBounce",
-            animateRotate: true,
-            animateScale: false
-        };
-        this.polarData = [
-            {
-                value: 300,
-                color: "#a3e1d4",
-                highlight: "#1ab394",
-                label: "App"
-            },
-            {
-                value: 140,
-                color: "#dedede",
-                highlight: "#1ab394",
-                label: "Software"
-            },
-            {
-                value: 200,
-                color: "#A4CEE8",
-                highlight: "#1ab394",
-                label: "Laptop"
-            }
-        ];
-        this.polarOptions = {
-            scaleShowLabelBackdrop: true,
-            scaleBackdropColor: "rgba(255,255,255,0.75)",
-            scaleBeginAtZero: true,
-            scaleBackdropPaddingY: 1,
-            scaleBackdropPaddingX: 1,
-            scaleShowLine: true,
-            segmentShowStroke: true,
-            segmentStrokeColor: "#fff",
-            segmentStrokeWidth: 2,
-            animationSteps: 100,
-            animationEasing: "easeOutBounce",
-            animateRotate: true,
-            animateScale: false
-        };
-        this.ctxPolar = null;
-        this.ctxDoughnut = null;
-        this.DoughnutChart = null;
-        this.Polarchart = null;
         console.log("_loginService.isLoggedIn()", _loginService.isLoggedIn());
         if (!_loginService.isLoggedIn()) {
             setTimeout(function () {
@@ -141,10 +69,6 @@ var AppComponent = (function () {
             msgSimple: "Welcome to INSPINIA",
             finalTimeOut: 1300
         });
-        var htmlElePolar = document.getElementById("polarChart");
-        this.ctxPolar = htmlElePolar.getContext("2d");
-        var htmlEleDoughnut = document.getElementById("doughnutChart");
-        this.ctxDoughnut = htmlEleDoughnut.getContext("2d");
     };
     AppComponent.prototype.onResize = function (e) {
         console.log("onResize ", e.target);

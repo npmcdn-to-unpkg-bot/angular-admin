@@ -1,16 +1,19 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
-import {leftSidebar, rightSidebar, smallChat, footerComponent, topNav, dashboardHeader, pageContent} from '../components'
+import {leftSidebar, rightSidebar, smallChat, footerComponent, topNav, dashboardHeader, pageContent, dashboard} from '../components'
 import { Router } from '@angular/router';
 import { tostrService } from '../services'
 import {  loginService } from '../services'
+import { ROUTER_DIRECTIVES} from '@angular/router';
 declare var $:any;
 var _directives:any = [
     leftSidebar, 
     rightSidebar, 
     smallChat, 
     footerComponent,
-    dashboardHeader,
-    pageContent,
+    ROUTER_DIRECTIVES,
+    //dashboardHeader,
+    //pageContent,
+    dashboard,
     topNav
 ];
 

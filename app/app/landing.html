@@ -2,8 +2,11 @@
     <left-sidebar></left-sidebar>
         <div id="page-wrapper" class="gray-bg dashbard-1">
             <nav-component></nav-component>
-            <dashboard-header></dashboard-header>        
-            <page-content></page-content>
+            <a routerLink="/application">Dashboard</a><br>
+            <a routerLink="form">Form</a>
+<!--            <dashboard-header></dashboard-header>        
+            <page-content></page-content>-->
+            <router-outlet></router-outlet>
         </div>
     <small-chat></small-chat>
     <right-sidebar></right-sidebar>
