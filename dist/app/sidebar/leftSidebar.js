@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var leftSidebar = (function () {
     function leftSidebar() {
     }
@@ -22,7 +23,8 @@ var leftSidebar = (function () {
     leftSidebar = __decorate([
         core_1.Component({
             selector: 'left-sidebar',
-            templateUrl: 'app/sidebar/leftsidebar.html'
+            templateUrl: 'app/sidebar/leftsidebar.html',
+            directives: [router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
     ], leftSidebar);

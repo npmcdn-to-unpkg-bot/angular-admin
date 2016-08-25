@@ -13,6 +13,11 @@ __export(require('./registerComponent/registerComponent'));
 __export(require('./forgetComponent/forgetComponent'));
 __export(require('./dashboard/dashboard'));
 __export(require('./formBasic/formBasic'));
+__export(require('./formAdvanced/formAdvanced'));
+__export(require('./formWizard/formWizard'));
+__export(require('./fileUpload/fileUpload'));
+__export(require('./textEditor/textEditor'));
+__export(require('./markDown/markDown'));
 // for wrapper -> loginComponent and wrapperComponent
 __export(require('./loginComponent/loginComponent'));
 __export(require('./wrapperComponent/wrapperComponent'));
