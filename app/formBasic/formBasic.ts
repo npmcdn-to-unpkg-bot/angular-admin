@@ -13,11 +13,10 @@ export class formBasic implements OnInit, OnDestroy {
     ngOnDestroy(){
         this._dynamicLoaderService.destroyJs();
     }
-    
-    
     ngOnInit(){
         this._dynamicLoaderService.loadJS(
             [ { link : 'js/plugins/iCheck/icheck.min.js',
+                id:'iCheck',
                 function : function(){
                      $('.i-checks').iCheck({
                          checkboxClass: 'icheckbox_square-green',

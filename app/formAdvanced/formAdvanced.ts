@@ -4,23 +4,68 @@ import { OffSoftAdmin } from '../OffSoftAdmin';
 
 declare var $:any;
 @OffSoftAdmin({
-    css:    [{ link : 'css/plugins/ionRangeSlider/ion.rangeSlider.css',
-                id:'ionRangeSliderCss',
-                removable : true
-            },
-            {   link : 'css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css',
-                id:'ionRangeSliderskinFlatCss',
-                removable : true
-            },
-            {   link : 'css/plugins/datapicker/datepicker3.css',
-                id:'ionRangeSliderskinFlatCss',
-                removable : true
-            },
-            {   link : 'css/plugins/clockpicker/clockpicker.css',
-                id:'clockpickerCss',
-                removable : true
-            }],
-    js:     [ { link : 'js/plugins/chosen/chosen.jquery.js',
+    css:[{ link : 'css/plugins/ionRangeSlider/ion.rangeSlider.css',
+        id:'ionRangeSliderCss',
+        removable : true
+    },
+    {   link : 'css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css',
+        id:'ionRangeSliderskinFlatCss',
+        removable : true
+    },
+    {   link : 'css/plugins/datapicker/datepicker3.css',
+        id:'datepicker3Css',
+        removable : true
+    },
+    {   link : 'css/plugins/clockpicker/clockpicker.css',
+        id:'clockpickerCss',
+        removable : true
+    },
+    {   link : 'css/plugins/chosen/chosen.css',
+        id:'chosenCss',
+        removable : true
+    }]
+})
+@Component({
+  selector: 'form-advanced',
+  templateUrl: 'app/formAdvanced/formAdvanced.html',
+  styleUrls: ['../../admin/css/plugins/jasny/jasny-bootstrap.min.css']
+})
+export class formAdvanced implements OnDestroy, AfterViewInit{
+    metaJS:any;
+    metaCSS:any;
+    lastEvent: boolean = true;
+    constructor(private _dynamicLoaderService:dynamicLoaderService){
+       _dynamicLoaderService.loadCss(this.metaCSS);
+    }
+    ngOnDestroy(){
+        this._dynamicLoaderService.destroyJs();
+    }
+    ngAfterViewInit(){
+        this._dynamicLoaderService.$loadJSEvent.subscribe(res=>{
+            console.log("res  ",res);
+            switch(res.id){
+                case "chosen":
+                    this.chosen();
+                break;
+                case "knob":
+                    this.knob();
+                break;
+                case "ionRangeSlider":
+                    this.ionRangeSlider();
+                break;
+                case "datepickerJS":
+                    this.datepicker();
+                break;
+                case "clockpicker":
+                    this.clockpicker();
+                break;
+                
+            }
+        });
+        
+        
+        this._dynamicLoaderService.loadJSEvent(
+            [ { link : 'js/plugins/chosen/chosen.jquery.js',
                 id:'chosen',
                 function : null,
                 removable : true
@@ -31,11 +76,7 @@ declare var $:any;
                 removable : true
              },
              { link : 'js/plugins/jasny/jasny-bootstrap.min.js',
-                function : null,
-                removable : true
-             },
-             { link : 'js/plugins/datapicker/bootstrap-datepicker.js',
-                id: 'datepicker',
+                id:'jasny',
                 function : null,
                 removable : true
              },
@@ -48,29 +89,16 @@ declare var $:any;
                 id: 'clockpicker',
                 function : null,
                 removable : true
-             }]   
-})
-@Component({
-  selector: 'form-advanced',
-  templateUrl: 'app/formAdvanced/formAdvanced.html',
-  styleUrls: ['../../admin/css/plugins/jasny/jasny-bootstrap.min.css']
-})
-export class formAdvanced implements OnDestroy, AfterViewInit{
+             },
+             { link : 'js/plugins/datapicker/bootstrap-datepicker.js',
+                id: 'datepickerJS',
+                function : null,
+                removable : true
+             }
+             
+             ]
+        );
 
-    lastEvent: boolean = true;
-    constructor(private _dynamicLoaderService:dynamicLoaderService){
-    }
-    ngOnDestroy(){
-        this._dynamicLoaderService.destroyJs();
-    }
-    
-    ngAfterViewInit(){
-                    this.chosen();
-                    this.knob();
-                    this.datepicker();
-                    this.ionRangeSlider();
-                    this.datepicker();
-                    this.clockpicker();
     }
     knob(){
         $(".dial").knob();
@@ -88,6 +116,8 @@ export class formAdvanced implements OnDestroy, AfterViewInit{
         }
     }
     datepicker(){
+        
+        console.log("datepicker js started");
         $('#data_1 .input-group.date').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,
