@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
 export class dynamicLoaderService {
   __startLink:string = '../../admin/';
   private ids:any = [];
+  $loadJSEvent:EventEmitter<string> = new EventEmitter<string>();
   constructor() {
   }
   loadJS(url: Array<any>){
+      
       console.log("loadJS",url);
       let _self = this;
       url.forEach(function(v, k){
@@ -21,6 +23,30 @@ export class dynamicLoaderService {
       
 
     };
+    loadJSEvent(url: Array<any>){
+      console.log("loadJS",url);
+      let _self = this;
+      
+      url.forEach(function(v, k){
+        let sent: number = 0;
+        let source = _self.__startLink + v.link;  
+        let scriptTag:any = document.createElement('script');
+            if(v.removable) _self.ids.push(scriptTag.id = "script" + Math.random());
+        scriptTag.src = source;
+        scriptTag.onload = function(){
+            sent = sent + 1;
+            _self.$loadJSEvent.next({url:source,id:v.id,sent:sent});
+        };
+        scriptTag.onreadystatechange = function(){
+            sent = sent + 1;
+            _self.$loadJSEvent.next({url:source,id:scriptTag.id,sent:sent});
+        };
+        parent.document.head.appendChild(scriptTag);
+        sent = 0;
+      });
+      
+
+    };
     destroyCss(){
         this.ids.forEach(function(v){
             document.getElementById(v).remove();
@@ -28,6 +54,7 @@ export class dynamicLoaderService {
     }
     
     loadCss(url: Array<any>){
+        console.log("loadCss",url); 
       let _self = this;
       url.forEach(function(v, k){
           
