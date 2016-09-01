@@ -3,6 +3,9 @@ import { dynamicLoaderService } from '../services';
 import { OffSoftAdmin } from '../OffSoftAdmin';
 
 declare var $:any;
+declare var moment:any;
+declare var Switchery:any;
+
 @OffSoftAdmin({
     css:[{ link : 'css/plugins/ionRangeSlider/ion.rangeSlider.css',
         id:'ionRangeSliderCss',
@@ -23,7 +26,35 @@ declare var $:any;
     {   link : 'css/plugins/chosen/chosen.css',
         id:'chosenCss',
         removable : true
-    }]
+    },
+    {   link : 'css/plugins/touchspin/jquery.bootstrap-touchspin.min.css',
+        id:'touchspinCss',
+        removable : true
+    },
+    {   link : 'css/plugins/select2/select2.min.css',
+        id:'select2Css',
+        removable : true
+    },
+    {   link : 'css/plugins/nouslider/jquery.nouislider.css',
+        id:'nouisliderCss',
+        removable : true
+    },
+    {   link : 'css/plugins/daterangepicker/daterangepicker-bs3.css',
+        id:'daterangepickerCss',
+        removable : true
+    },
+    {   link : 'css/plugins/switchery/switchery.css',
+        id:'switcheryCss',
+        removable : true
+    },
+    {   link : 'css/plugins/colorpicker/bootstrap-colorpicker.min.css',
+        id:'colorpickerCss',
+        removable : true
+    },
+    {   link : 'css/plugins/cropper/cropper.min.css',
+        id:'cropperCss',
+        removable : true
+    }]//
 })
 @Component({
   selector: 'form-advanced',
@@ -59,7 +90,27 @@ export class formAdvanced implements OnDestroy, AfterViewInit{
                 case "clockpicker":
                     this.clockpicker();
                 break;
-                
+                case "touchspinJS":
+                    this.touchspin();
+                break;
+                case "select2JS":
+                    this.select2JS();
+                break;
+                case "nouisliderJS":
+                    this.nouisliderJS();
+                break;
+                case "daterangepickerJS":
+                    this.daterangepickerJS();
+                break;
+                case "switcheryJS":
+                    this.switcheryJS();
+                break;
+                case "colorpickerJS":
+                    this.colorpickerJS();
+                break;
+                case "cropperJS":
+                    this.cropperJS();
+                break;
             }
         });
         
@@ -94,11 +145,233 @@ export class formAdvanced implements OnDestroy, AfterViewInit{
                 id: 'datepickerJS',
                 function : null,
                 removable : true
+             },
+             { link : 'js/plugins/touchspin/jquery.bootstrap-touchspin.min.js',
+                id: 'touchspinJS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/select2/select2.full.min.js',
+                id: 'select2JS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/nouslider/jquery.nouislider.min.js',
+                id: 'nouisliderJS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/daterangepicker/daterangepicker.js',
+                id: 'daterangepickerJS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/switchery/switchery.js',
+                id: 'switcheryJS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/colorpicker/bootstrap-colorpicker.min.js',
+                id: 'colorpickerJS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/cropper/cropper.min.js',
+                id: 'cropperJS',
+                function : null,
+                removable : true
              }
              
              ]
         );
 
+    }
+    cropperJS(){
+        let $image = $(".image-crop > img")
+        $($image).cropper({
+            aspectRatio: 1.618,
+            preview: ".img-preview",
+            done: function(data) {
+                // Output the result data for cropping image.
+            }
+        });
+        let $inputImage = $("#inputImage");
+        if (window.hasOwnProperty('FileReader')) {
+                $inputImage.change(function() {
+                    var fileReader = new FileReader(),
+                            files = this.files,
+                            file;
+
+                    if (!files.length) {
+                        return;
+                    }
+
+                    file = files[0];
+
+                    if (/^image\/\w+$/.test(file.type)) {
+                        fileReader.readAsDataURL(file);
+                        fileReader.onload = function () {
+                            $inputImage.val("");
+                            $image.cropper("reset", true).cropper("replace", this.result);
+                        };
+                    } else {
+                        showMessage("Please choose an image file.");
+                    }
+                });
+            } else {
+                $inputImage.addClass("hide");
+            }
+        $("#download").click(function() {
+                window.open($image.cropper("getDataURL"));
+            });
+
+            $("#zoomIn").click(function() {
+                $image.cropper("zoom", 0.1);
+            });
+
+            $("#zoomOut").click(function() {
+                $image.cropper("zoom", -0.1);
+            });
+
+            $("#rotateLeft").click(function() {
+                $image.cropper("rotate", 45);
+            });
+
+            $("#rotateRight").click(function() {
+                $image.cropper("rotate", -45);
+            });
+
+            $("#setDrag").click(function() {
+                $image.cropper("setDragMode", "crop");
+            });
+    }
+    colorpickerJS(){
+        $('.demo1').colorpicker();
+        let divStyle = $('.back-change')[0].style;
+        $('#demo_apidemo').colorpicker({
+            color: divStyle.backgroundColor
+        }).on('changeColor', function(ev) {
+            divStyle.backgroundColor = ev.color.toHex();
+        });
+    }
+
+    switcheryJS(){
+        let elem = parent.document.querySelector('.js-switch');
+        let switchery = new Switchery(elem, { color: '#1AB394' });
+
+        let elem_2 = parent.document.querySelector('.js-switch_2');
+        let switchery_2 = new Switchery(elem_2, { color: '#ED5565' });
+
+        let elem_3 = parent.document.querySelector('.js-switch_3');
+        let switchery_3 = new Switchery(elem_3, { color: '#1AB394' });
+    }
+    daterangepickerJS(){
+        $('input[name="daterange"]').daterangepicker();
+        $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+        $('#reportrange').daterangepicker({
+                format: 'MM/DD/YYYY',
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2015',
+                dateLimit: { days: 60 },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                opens: 'right',
+                drops: 'down',
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-primary',
+                cancelClass: 'btn-default',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Cancel',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr','Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            }, function(start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            });
+
+    }
+    nouisliderJS(){
+      $("#basic_slider").noUiSlider({
+            start: 40,
+            behaviour: 'tap',
+            connect: 'upper',
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+        $("#range_slider").noUiSlider({
+            start: [ 40, 60 ],
+            behaviour: 'drag',
+            connect: true,
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });
+
+        $("#drag-fixed").noUiSlider({
+            start: [ 40, 60 ],
+            behaviour: 'drag-fixed',
+            connect: true,
+            range: {
+                'min':  20,
+                'max':  80
+            }
+        });  
+    }
+    select2JS(){
+        $(".select2_demo_1").select2();
+        $(".select2_demo_2").select2();
+        $(".select2_demo_3").select2({
+            placeholder: "Select a state",
+            allowClear: true
+        });
+    }
+    touchspin(){
+        $(".touchspin1").TouchSpin({
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
+
+        $(".touchspin2").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%',
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
+
+        $(".touchspin3").TouchSpin({
+            verticalbuttons: true,
+            buttondown_class: 'btn btn-white',
+            buttonup_class: 'btn btn-white'
+        });
     }
     knob(){
         $(".dial").knob();
