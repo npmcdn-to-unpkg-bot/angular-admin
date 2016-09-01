@@ -44,7 +44,7 @@
         <div class="ibox-content">
             <form id="my-awesome-dropzone" class="dropzone" action="form_file_upload.html#">
                 <div class="dropzone-previews"></div>
-                <button type="submit" class="btn btn-primary pull-right">Submit this form!</button>
+                <button type="submit" class="btn btn-primary pull-right" (click)="clickSubmit($event)">Submit this form!</button>
             </form>
             <div>
                 <div class="m text-right"><small>DropzoneJS is an open source library that provides drag'n'drop file uploads with image previews: <a href="https://github.com/enyo/dropzone" target="_blank">https://github.com/enyo/dropzone</a></small> </div>
