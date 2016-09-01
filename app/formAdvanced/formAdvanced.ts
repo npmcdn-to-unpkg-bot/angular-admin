@@ -215,7 +215,7 @@ export class formAdvanced implements OnDestroy, AfterViewInit{
                             $image.cropper("reset", true).cropper("replace", this.result);
                         };
                     } else {
-                        showMessage("Please choose an image file.");
+                        alert("Please choose an image file.");
                     }
                 });
             } else {
