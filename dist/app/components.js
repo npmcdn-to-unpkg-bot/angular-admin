@@ -18,6 +18,8 @@ __export(require('./formWizard/formWizard'));
 __export(require('./fileUpload/fileUpload'));
 __export(require('./textEditor/textEditor'));
 __export(require('./markDown/markDown'));
+__export(require('./Widgets/Widgets'));
+__export(require('./Metrics/Metrics'));
 // for wrapper -> loginComponent and wrapperComponent
 __export(require('./loginComponent/loginComponent'));
 __export(require('./wrapperComponent/wrapperComponent'));

@@ -1,16 +1,11 @@
 import { Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
 import { OffSoftAdmin } from '../OffSoftAdmin';
 import { dynamicLoaderService } from '../services';
-declare var $:any;
-declare var Dropzone:any;
+
 
 @OffSoftAdmin({
-    css:[{ link : 'css/plugins/dropzone/basic.css',
-        id:'dropzonebasicCss',
-        removable : true
-    },
-    { link : 'css/plugins/dropzone/dropzone.css',
-        id:'dropzoneCss',
+    css:[{ link : 'css/plugins/bootstrap-markdown/bootstrap-markdown.min.css',
+        id:'markdownCss',
         removable : true
     }]
 })
@@ -33,46 +28,38 @@ export class markDown implements OnDestroy, AfterViewInit {
         this._dynamicLoaderService.$loadJSEvent.subscribe(res=>{
             console.log("res  ",res);
             switch(res.id){
-                case "dropzoneJS":
-                    this.dropzoneJS();
+                case "bootstrapmarkdownJS":
+                    this.bootstrapmarkdownJS();
+                break;
+                case "markdownJS":
+                    this.markdownJS();
                 break;
             }
         });
         this._dynamicLoaderService.loadJSEvent(
-            [{ link : 'js/plugins/dropzone/dropzone.js',
-                id:'dropzoneJS',
+            [{ link : 'js/plugins/bootstrap-markdown/bootstrap-markdown.js',
+                id:'bootstrapmarkdownJS',
+                function : null,
+                removable : true
+             },
+             { link : 'js/plugins/bootstrap-markdown/markdown.js',
+                id:'markdownJS',
                 function : null,
                 removable : true
              }]
         );
     }
-    dropzoneJS(){
-        console.log("Dropzone",Dropzone);
-        Dropzone.options.myAwesomeDropzone = {
-
-                autoProcessQueue: false,
-                uploadMultiple: true,
-                parallelUploads: 100,
-                maxFiles: 100,
-
-                // Dropzone settings
-                init: function() {
-                    var myDropzone = this;
-
-                    this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        myDropzone.processQueue();
-                    });
-                    this.on("sendingmultiple", function() {
-                    });
-                    this.on("successmultiple", function(files, response) {
-                    });
-                    this.on("errormultiple", function(files, response) {
-                    });
-                }
-
-            }
-
+    bootstrapmarkdownJS(){
+        this._dynamicLoaderService.loadJSEvent(
+            [{ link : 'js/plugins/bootstrap-markdown/markdown.js',
+                id:'markdownJS',
+                function : null,
+                removable : true
+             }]
+        );
     }
+    markdownJS(){
+        
+
+    }    
 }

@@ -11,7 +11,9 @@ exports.AppRoutes = [
             { path: 'formWizard', component: components_2.formWizard },
             { path: 'fileUpload', component: components_2.fileUpload },
             { path: 'textEditor', component: components_2.textEditor },
-            { path: 'markDown', component: components_2.markDown }
+            { path: 'markDown', component: components_2.markDown },
+            { path: 'Widgets', component: components_2.Widgets },
+            { path: 'Metrics', component: components_2.Metrics }
         ]
     },
     { path: 'forget', component: components_1.forgetComponent },

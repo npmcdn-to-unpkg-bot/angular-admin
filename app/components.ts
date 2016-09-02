@@ -15,6 +15,9 @@ export * from './formWizard/formWizard'
 export * from './fileUpload/fileUpload'
 export * from './textEditor/textEditor'
 export * from './markDown/markDown'
+export * from './Widgets/Widgets'
+export * from './Metrics/Metrics'
+
 
 
 
